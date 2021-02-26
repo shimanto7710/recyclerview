@@ -1,0 +1,7 @@
+
+0. change project name, package
+1. any project can be started from this project (network call, shared preference, mainAplication -> done)
+2. already implemented network call (tested with dummy call) with auth token (check interceptor)
+3. change baseUrl for api call
+4. api call system choose any-> callback, suspend with callback, suspend without callback (viewmodel and livedata if needed) (tested)
+5. checkout utls
