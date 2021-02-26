@@ -19,6 +19,7 @@ class NetworkCallImpl : NetworkCall {
     private var apiClient = ApiClient().getApiService()
 
 
+    // callback
     override fun dummyData(callback: NRCallback<DummyResponse>) {
         val call = apiClient.getDummyData()
         call?.enqueue(object : Callback<DummyResponse> {
@@ -35,6 +36,7 @@ class NetworkCallImpl : NetworkCall {
         })
     }
 
+    // kotlin coroutine with callback
     override suspend fun dummyDataWithSuspend(callback: NRCallback<DummyResponse>) {
          apiClient.getDummyDataWithSuspend().let {
              if (it.isSuccessful){
@@ -46,6 +48,7 @@ class NetworkCallImpl : NetworkCall {
          }
     }
 
+    // kotlin coroutine without callback
     override suspend fun dummyDataWithSuspendWithoutCallback(): Response<DummyResponse> {
         return apiClient.getDummyDataWithSuspend()
     }

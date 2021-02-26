@@ -10,9 +10,11 @@ import retrofit2.http.*
 
 interface ApiEndpoint {
 
+    // retrofit with callback
     @GET("/todos/1")
      fun getDummyData() : Call<DummyResponse>
 
+    // retrofit with coroutine
     @GET("/todos/1")
     suspend fun getDummyDataWithSuspend() : Response<DummyResponse>
 

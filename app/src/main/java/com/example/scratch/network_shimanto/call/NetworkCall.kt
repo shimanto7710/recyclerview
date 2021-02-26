@@ -5,11 +5,13 @@ import retrofit2.Response
 
 interface NetworkCall {
 
+    // callback
     fun dummyData(callback: NRCallback<DummyResponse>)
 
+    // kotlin coroutine with callback
     suspend fun dummyDataWithSuspend(callback: NRCallback<DummyResponse>)
 
-
+    // kotlin coroutine without callback
     suspend fun dummyDataWithSuspendWithoutCallback() : Response<DummyResponse>
 
 

@@ -3,6 +3,8 @@ package com.example.scratch.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import com.example.scratch.R
 import com.example.scratch.network_shimanto.call.CallInfo
@@ -16,9 +18,21 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     private val networkCall = NetworkCallImpl()
 
+    private lateinit var viewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+
+
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+
+        // kotlin coroutine without callback .... with mvvm and livedata
+        viewModel.getDummyData().observe(this, Observer {
+            Log.d("onSuccess","viewModel $it")
+        })
 
 
         getDummyDataWithCallback()
@@ -31,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // callback
     private fun getDummyDataWithCallback(){
         networkCall.dummyData(object : NRCallback<DummyResponse> {
             override fun onSuccess(data: DummyResponse?, callInfo: CallInfo?) {
@@ -44,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    // kotlin coroutine with callback
     private suspend fun getDummyDataWithSuspend() {
         networkCall.dummyDataWithSuspend(object : NRCallback<DummyResponse> {
             override fun onSuccess(data: DummyResponse?, callInfo: CallInfo?) {
@@ -58,6 +74,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    // kotlin coroutine without callback
     private suspend fun getDummyDataWithSuspendWithoutCallback() {
         networkCall.dummyDataWithSuspendWithoutCallback().let {
             if (it.isSuccessful){
