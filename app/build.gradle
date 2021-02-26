@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -13,6 +14,10 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+
+        renderscriptSupportModeEnabled true
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -42,4 +47,25 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // material
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    // network
+    implementation 'com.squareup.retrofit2:retrofit:2.7.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
+    implementation 'com.google.code.gson:gson:2.7'
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+
+    //Custom Dependancies
+    def lifecycle_version = "2.1.0"
+    implementation  "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    kapt  "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+
+    //Kotlin Lifecycle
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
 }
