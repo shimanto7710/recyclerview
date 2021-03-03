@@ -1,7 +1,7 @@
 package com.example.scratch.network.call
 
 import com.example.scratch.core.Either
-import com.example.scratch.network.ApiResponse
+
 import com.example.scratch.network.response.DummyResponse
 import retrofit2.Response
 
@@ -14,7 +14,7 @@ interface NetworkCall {
 
     suspend fun suspendResponse() :Response<DummyResponse>
 
-    suspend fun suspendResponseWithErrorFiltering(): ApiResponse<DummyResponse>
+
 
     suspend fun perfectWay() : DummyResponse
 

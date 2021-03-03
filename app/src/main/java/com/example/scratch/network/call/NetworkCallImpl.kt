@@ -1,6 +1,6 @@
 package com.example.scratch.network.call
 
-import com.example.scratch.network.ApiResponse
+
 import com.example.scratch.network.api.ApiClient
 import com.example.scratch.network.response.DummyResponse
 
@@ -49,10 +49,7 @@ class NetworkCallImpl : NetworkCall {
         return apiClient.suspendResponse()
     }
 
-    override suspend fun suspendResponseWithErrorFiltering(): ApiResponse<DummyResponse> {
-        var response=apiClient.suspendResponse()
-         return ApiResponse.create(response)
-    }
+
 
     override suspend fun perfectWay(): DummyResponse {
         return apiClient.perfectWay()
