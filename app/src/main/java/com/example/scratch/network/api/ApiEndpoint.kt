@@ -1,8 +1,8 @@
-package com.example.scratch.network_shimanto.api
+package com.example.scratch.network.api
 
 
 
-import com.example.scratch.network_shimanto.response.DummyResponse
+import com.example.scratch.network.response.DummyResponse
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -12,11 +12,19 @@ interface ApiEndpoint {
 
     // retrofit with callback
     @GET("/todos/1")
-     fun getDummyData() : Call<DummyResponse>
+     fun callBack() : Call<DummyResponse>
 
     // retrofit with coroutine
     @GET("/todos/1")
-    suspend fun getDummyDataWithSuspend() : Response<DummyResponse>
+    suspend fun suspendResponseCallback() : Response<DummyResponse>
+
+    @GET("/todos/1")
+    suspend fun suspendResponse() : Response<DummyResponse>
+
+    @GET("/todos/1")
+    suspend fun perfectWay() : DummyResponse
+
+
 
 //    @Headers("Content-Type: application/x-www-form-urlencoded")
 //    @FormUrlEncoded

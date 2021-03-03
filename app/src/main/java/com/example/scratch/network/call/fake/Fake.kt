@@ -1,4 +1,4 @@
-package com.example.scratch.network_shimanto.call.fake
+package com.example.scratch.network.call.fake
 
 
 object Fake {

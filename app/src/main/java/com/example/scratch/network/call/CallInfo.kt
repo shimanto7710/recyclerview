@@ -1,4 +1,4 @@
-package com.example.scratch.network_shimanto.call
+package com.example.scratch.network.call
 
 /**
  * Copyright 2019 (C) xplo

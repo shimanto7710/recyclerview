@@ -1,6 +1,8 @@
-package com.example.scratch.network_shimanto.call
+package com.example.scratch.network.call
 
-import com.example.scratch.network_shimanto.response.DummyResponse
+import com.example.scratch.core.Either
+import com.example.scratch.network.ApiResponse
+import com.example.scratch.network.response.DummyResponse
 import retrofit2.Response
 
 interface NetworkCall {
@@ -8,11 +10,17 @@ interface NetworkCall {
     // callback
     fun dummyData(callback: NRCallback<DummyResponse>)
 
-    // kotlin coroutine with callback
-    suspend fun dummyDataWithSuspend(callback: NRCallback<DummyResponse>)
+    suspend fun suspendResponseCallback(callback: NRCallback<DummyResponse>)
 
-    // kotlin coroutine without callback
-    suspend fun dummyDataWithSuspendWithoutCallback() : Response<DummyResponse>
+    suspend fun suspendResponse() :Response<DummyResponse>
+
+    suspend fun suspendResponseWithErrorFiltering(): ApiResponse<DummyResponse>
+
+    suspend fun perfectWay() : DummyResponse
+
+
+
+//    suspend fun either() :  Either<String, DummyResponse>
 
 
 //    fun auth(loginRe: LogInRequestBody, callback: NRCallback<LoginResponse>)

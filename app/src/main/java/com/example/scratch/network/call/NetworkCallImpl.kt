@@ -1,8 +1,8 @@
-package com.example.scratch.network_shimanto.call
+package com.example.scratch.network.call
 
-import android.util.Log
-import com.example.scratch.network_shimanto.api.ApiClient
-import com.example.scratch.network_shimanto.response.DummyResponse
+import com.example.scratch.network.ApiResponse
+import com.example.scratch.network.api.ApiClient
+import com.example.scratch.network.response.DummyResponse
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,7 +21,7 @@ class NetworkCallImpl : NetworkCall {
 
     // callback
     override fun dummyData(callback: NRCallback<DummyResponse>) {
-        val call = apiClient.getDummyData()
+        val call = apiClient.callBack()
         call?.enqueue(object : Callback<DummyResponse> {
             override fun onFailure(call: Call<DummyResponse>, t: Throwable) {
                 var callInfo = CallInfo(404, "connection failed")
@@ -36,22 +36,38 @@ class NetworkCallImpl : NetworkCall {
         })
     }
 
-    // kotlin coroutine with callback
-    override suspend fun dummyDataWithSuspend(callback: NRCallback<DummyResponse>) {
-         apiClient.getDummyDataWithSuspend().let {
-             if (it.isSuccessful){
-                 callback.onSuccess(data = it.body(),callInfo = CallInfo(it.code(),it.message()))
-             }else{
-                 callback.onSuccess(data = it.body(),callInfo = CallInfo(it.code(),it.message()))
-             }
-
-         }
+    override suspend fun suspendResponseCallback(callback: NRCallback<DummyResponse>) {
+        var response = apiClient.suspendResponseCallback()
+        if (response.isSuccessful) {
+            callback.onSuccess(response.body(), CallInfo(400, ""))
+        } else {
+            callback.onSuccess(response.body(), CallInfo(400, ""))
+        }
     }
 
-    // kotlin coroutine without callback
-    override suspend fun dummyDataWithSuspendWithoutCallback(): Response<DummyResponse> {
-        return apiClient.getDummyDataWithSuspend()
+    override suspend fun suspendResponse(): Response<DummyResponse> {
+        return apiClient.suspendResponse()
     }
+
+    override suspend fun suspendResponseWithErrorFiltering(): ApiResponse<DummyResponse> {
+        var response=apiClient.suspendResponse()
+         return ApiResponse.create(response)
+    }
+
+    override suspend fun perfectWay(): DummyResponse {
+        return apiClient.perfectWay()
+    }
+
+
+//    override suspend fun either():Either<String, DummyResponse>{
+//        apiClient.getDummyDataWithSuspend().let {
+//            if (it.isSuccessful){
+//                return Either.Right(it.body()!!)
+//            }else{
+//                return Either.Left("")
+//            }
+//        }
+//    }
 
 
 //    override fun postToServer(post: PostRequestBody, callback: NRCallback<Void>) {

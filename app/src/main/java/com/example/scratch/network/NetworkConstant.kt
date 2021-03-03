@@ -1,4 +1,4 @@
-package com.example.scratch.network_shimanto
+package com.example.scratch.network
 
 object NetworkConstant {
     const val TOKEN="TOKEN"

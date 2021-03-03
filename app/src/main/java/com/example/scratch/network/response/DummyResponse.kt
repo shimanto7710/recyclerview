@@ -1,4 +1,4 @@
-package com.example.scratch.network_shimanto.response
+package com.example.scratch.network.response
 
 data class DummyResponse(
     val completed: Boolean,

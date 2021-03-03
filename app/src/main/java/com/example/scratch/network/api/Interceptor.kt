@@ -1,8 +1,8 @@
-package com.example.scratch.network_shimanto.api
+package com.example.scratch.network.api
 
 import android.net.TrafficStats
 import android.util.Log
-import com.example.scratch.network_shimanto.NetworkConstant
+import com.example.scratch.network.NetworkConstant
 import com.example.scratch.pref.PrefUtils
 
 
